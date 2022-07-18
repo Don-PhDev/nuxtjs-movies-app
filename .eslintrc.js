@@ -18,5 +18,7 @@ module.exports = {
       'ignores': ['hero']
     }],
     "no-unused-vars": "off",
+    "no-dupe-keys": "off",
+    "vue/no-dupe-keys": "off",
   },
 }
