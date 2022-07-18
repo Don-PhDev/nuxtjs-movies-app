@@ -59,9 +59,7 @@ export default {
         "https://api.themoviedb.org/3/movie/now_playing?api_key=589a0bba7dc58714016e2ba181e8e1f5&language=en-US&page=1"
       )
       const result = await data
-      result.data.results.forEach((movie) => {
-        this.movies.push(movie)
-      })
+      this.movies = result.data.results
     }
   }
 }
