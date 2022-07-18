@@ -1,7 +1,15 @@
 <template>
   <div class="home">
+    <!-- Hero -->
     <Hero />
 
+    <!-- Search -->
+    <div class="container search">
+      <input v-model.lazy="searchInput" type="text" placeholder="Search" />
+      <button v-show="searchInput !== ''" class="button">Clear Search</button>
+    </div>
+
+    <!-- Movies -->
     <div class="container movies">
       <div id="movies-grid" class="movies-grid">
         <div v-for="(movie, idx) in movies" :key="idx" class="movie">
@@ -48,6 +56,7 @@ export default {
   data() {
     return {
       movies: [],
+      searchInput: "",
     }
   },
   async fetch() {
@@ -70,24 +79,6 @@ export default {
   .loading {
     padding-top: 120px;
     align-items: flex-start;
-  }
-  .search {
-    display: flex;
-    padding: 32px 16px;
-    input {
-      max-width: 350px;
-      width: 100%;
-      padding: 12px 6px;
-      font-size: 14px;
-      border: none;
-      &:focus {
-        outline: none;
-      }
-    }
-    .button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
   }
   .movies {
     padding: 32px 16px;
