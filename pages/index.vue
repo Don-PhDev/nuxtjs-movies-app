@@ -9,8 +9,11 @@
       <button v-show="searchInput !== ''" class="button" @click="clearSearch">Clear Search</button>
     </div>
 
+    <!-- Loading -->
+    <Loading v-if="$fetchState.pending" />
+
     <!-- Movies -->
-    <div class="container movies">
+    <div v-else class="container movies">
 
       <!-- Searched Movies -->
       <div v-if="searchInput !== ''" id="movies-grid" class="movies-grid">
@@ -105,6 +108,7 @@ export default {
 
     await this.searchMovies()
   },
+  fetchDelay: 1000,
   methods: {
     async getMovies() {
       const data = axios.get(
