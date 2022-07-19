@@ -15,7 +15,7 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'vue/multi-word-component-names': 0,
     'vue/multi-word-component-names': ['error', {
-      'ignores': ['hero']
+      'ignores': ['hero', 'loading']
     }],
     "no-unused-vars": "off",
     "no-dupe-keys": "off",
