@@ -14,15 +14,11 @@
         <p class="movie-fact tagline">
           <span>Tagline:</span> "{{ movie.tagline }}"
         </p>
+        <p v-if="movie.genres !== 'undefined'" class="movie-fact">
+          <span>Genres:</span> {{ wordsFormatter.format(movieGenres) }}
+        </p>
         <p class="movie-fact">
-          <span>Released:</span>
-          {{
-            new Date(movie.release_date).toLocaleString("en-us", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })
-          }}
+          <span>Released:</span> {{ dateFormat }}
         </p>
         <p class="movie-fact">
           <span>Duration:</span> {{ movie.runtime }} minutes
@@ -30,10 +26,7 @@
         <p v-if="movie.revenue !== 0" class="movie-fact">
           <span>Revenue:</span>
           {{
-            movie.revenue.toLocaleString("en-us", {
-              style: "currency",
-              currency: "USD",
-            })
+            currencyFormatter.format(movie.revenue)
           }}
         </p>
         <p class="movie-fact">
@@ -59,6 +52,27 @@ export default {
     await this.getSingleMovie()
   },
   fetchDelay: 1000,
+  computed: {
+    movieGenres() {
+      return this.movie.genres.map((genre) => genre.name)
+    },
+    wordsFormatter() {
+      return new Intl.ListFormat('en', { style: "long", type: "conjunction" });
+    },
+    dateFormat() {
+      return new Date(this.movie.release_date).toLocaleString("en-us", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      })
+    },
+    currencyFormatter() {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      })
+    },
+  },
   methods: {
     async getSingleMovie() {
       const data = axios.get(
@@ -66,8 +80,8 @@ export default {
       )
       const result = await data
       this.movie = result.data
-    }
-  }
+    },
+  },
 }
 </script>
 
