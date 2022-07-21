@@ -11,7 +11,7 @@
       </div>
       <div class="movie-content">
         <h1>Title: {{ movie.title }}</h1>
-        <p class="movie-fact tagline">
+        <p v-if="movie.tagline !== ''" class="movie-fact tagline">
           <span>Tagline:</span> "{{ movie.tagline }}"
         </p>
         <p v-if="movie.genres !== 'undefined'" class="movie-fact">
@@ -67,9 +67,9 @@ export default {
       })
     },
     currencyFormatter() {
-      return new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
+      return new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
       })
     },
   },
