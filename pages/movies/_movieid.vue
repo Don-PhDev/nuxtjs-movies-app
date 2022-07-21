@@ -45,13 +45,30 @@ export default {
   name: "SingleMovie",
   data() {
     return {
-      movie: null,
+      movie: '',
     }
   },
   async fetch() {
     await this.getSingleMovie()
   },
   fetchDelay: 1000,
+  head() {
+    return {
+      title: this.movie.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.movie.overview,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: this.movie.title?.concat(",", this.movieGenres),
+        },
+      ],
+    }
+  },
   computed: {
     movieGenres() {
       return this.movie.genres.map((genre) => genre.name)
